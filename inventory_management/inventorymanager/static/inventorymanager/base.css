@@ -1,1 +1,31 @@
-#navbar {display: inline;}
+* {
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+li {display: inline;}
+#navbar {
+    display: block;
+    padding: 1px;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+a {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: white;
+    color: black;
+    border-radius: 3px;
+    transition: 0.2s ease-in-out;
+}
+
+.active {
+    background-color: beige;
+}
