@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'inventorymanager/login.css' %}">
+</head>
+<body>
+    <div class="center">
+    <h1>Register</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="input">
+        <input type="text" placeholder="Name">
+        </div>
+        <div class="input">
+        <input type="email" placeholder="Email">
+        </div>
+        <div class="input">
+        <input type="password" placeholder="Password">
+        </div>
+        <div class="input">
+        <input type="password" name="" id="" placeholder="Password Again">
+        </div>
+        <div class="input">
+        <input type="text" placeholder="Company Name">
+        </div>
+        <button type="submit">Register</button>
+        <div class="newuser"><a href="#">Existing User ?</a></div>
+    </form>
+    </div>
+</body>
+</html>

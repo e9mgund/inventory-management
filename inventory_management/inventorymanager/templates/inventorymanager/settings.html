@@ -1,0 +1,21 @@
+{% extends 'inventorymanager/base.html' %}
+
+{% block content %}
+
+<div class="center">
+    <h1>Change Password</h1>
+    <form action="" method="post">
+        <div class="input">
+        <input type="text" name="oldpass" placeholder="Enter old Password">
+        </div>
+        <div class="input">
+        <input type="text" name="newpass" placeholder="Enter new Password">
+        </div>
+        <div class="input">
+        <input type="text" name="newpass2" placeholder="Enter new Password Again">
+        </div>
+        <button type="submit">Change Password</button>
+    </form>
+</div>
+
+{% endblock content %}
