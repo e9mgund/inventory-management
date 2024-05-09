@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,300&display=swap');
+
+* {
+    font-family: "Spline sans", sans-serif;
+    line-height: 1.5;
+    /* background-color: #eaeef6; */
+}
+
+.Uppercards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-evenly;
+    gap: 2.5rem;
+    margin: 10vh auto;
+}
+
+.card {
+    width: 25em;
+    margin: 10px;
+    margin-top: 20px;
+    text-align: center;
+    border: 1px solid black;
+    padding: 50px;
+    border-radius: 16px;
+    box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
+    transition: .5s;
+}
+
+.newfield {
+    font: inherit;
+    line-height: 1;
+    background-color: #6558d3;
+    color: white;
+    padding: 1em;
+    border-radius: 6px;
+    font-weight: 500;
+    border: none;
+}
+
+.newfield:hover,
+.newfield:focus {
+    cursor: pointer;
+    background-color: #4133b7;
+}
+
+.card:hover,
+.card:focus {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.assetType {
+    background-color: #3765e6;
+    color: white;
+    font-weight: 700;
+}
+
+.assetType:hover ,
+.assetType:focus {
+    background-color: rgb(236, 225, 61);
+    color: black;
+}
+
+
+/* for tables */
+.table-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.table-inside {
+    width:1170px
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
+    background: #fff;
+    overflow: hidden;
+    width: 100%;
+}
+
+td , th {
+    /* border: 1px solid #dddddd; */
+    text-align: left;
+    padding: 8px;
+    font-family: "Open sans";
+    color: rgb(68, 68, 68);
+}
+
+th {
+    background-color: #36304a;
+    height: 60px;
+    font-family: "Open sans";
+    color: #fff;
+    font-size: 18px;
+    line-height: 1.2;
+}
+
+tr:nth-child(even) {
+    background-color: #bdbdbd;
+}
+
+tr:hover{
+    background-color: #bdbdbd;
+}
+
+.hider {
+    display: none;
+}

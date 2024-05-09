@@ -1,4 +1,4 @@
-* {
+/* * {
     background-color: black;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -11,15 +11,6 @@ li {
 
 ul {
     list-style-type: none;
-}
-
-#navbar {
-    display: block;
-    padding: 1px;
-    background-color: black;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
 }
 
 a {
@@ -37,4 +28,26 @@ a:hover {
 
 .active {
     background-color: beige;
+} */
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    margin: 10px;
+    overflow: hidden;
+}
+
+.navelement {
+    padding: 25px;
+    text-decoration: none;
+    color: black;
+    font-size: larger;
+    cursor: pointer;
+}
+
+.right-align {
+    margin-left: auto;
 }

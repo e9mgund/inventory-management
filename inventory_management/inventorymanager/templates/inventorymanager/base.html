@@ -6,17 +6,14 @@
     <title>Document</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'inventorymanager/base.css' %}">
+    <link rel="stylesheet" href="{% static 'inventorymanager/overview.css' %}">
 </head>
 <body>
-    <div id="navbar">
-        <div class="navlist">
-            <ul style="padding: 0;">
-            <li><a href="#">Overview</a></li>
-            <li><a href="#">Groups</a></li>
-            <li><a href="#">Settings</a></li>
-            <li style="float: right;"><a href="#">Sign Out</a></li>
-            </ul>
-        </div>
+    <div class="navbar">
+        <a class="navelement" href="#">Overview</a>
+        <a class="navelement" href="#">Groups</a>
+        <a class="navelement" href="#">Settings</a>
+        <a class="navelement right-align" href="#">Logout</a>
     </div>
     {% block content %}
     {% endblock content %}
