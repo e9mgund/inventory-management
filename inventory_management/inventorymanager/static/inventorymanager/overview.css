@@ -94,6 +94,16 @@ td , th {
     color: rgb(68, 68, 68);
 }
 
+.first-col {
+    text-decoration: none;
+    font-family: "Open sans";
+    color: rgb(68, 68, 68);
+}
+
+.first-col:hover {
+    text-decoration: underline;
+}
+
 th {
     background-color: #36304a;
     height: 60px;

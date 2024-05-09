@@ -5,10 +5,10 @@
 <link rel="stylesheet" href="{% static 'inventorymanger/overview.css' %}">
 {% block content %}
 <div class="Uppercards">
-        <div class="assetType card" onclick="show()">
+        <div class="assetType card" onclick="typeShow()">
             Asset Types
         </div>
-        <div class="assets card">
+        <div class="assets card" onclick="assetShow()">
             Assets
         </div>
         <div class="employees card">
@@ -25,7 +25,7 @@
     </thead>
     {% for asset in atypes_list %}
     <tr>
-        <td>{{asset.type_name}}</td>
+        <td><a class="first-col" href="#">{{asset.type_name}}</a></td>
         <td>{{asset.type_quantity}}</td>
     </tr>
     {% endfor %}
@@ -33,10 +33,17 @@
 </div>
 </div>
 
+<div id="asset" class="hider">Hiiiii</div>
+
 
 <script>
-    function show() {
-        document.getElementById("assettype").className = "table-container"
+    function typeShow() {
+        document.getElementById("assettype").className = "table-container";
+        document.getElementById("asset").className = "hider";
+    }
+    function assetShow() {
+        document.getElementById("assettype").className = "hider";
+        document.getElementById("asset").className = "block";
     }
 </script>
 {% endblock content %}

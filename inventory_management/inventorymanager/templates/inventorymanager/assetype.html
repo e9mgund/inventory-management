@@ -1,0 +1,20 @@
+{% extends 'overview.html' %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'inventorymanager/overview.css' %}">
+{% block assettype %}
+<div class="table-inside">
+    <table>
+        <thead>
+            <th>Name</th>
+            <th>Quantity</th>
+        </thead>
+        {% for asset in atypes_list %}
+        <tr>
+            <td><a class="first-col" href="#">{{asset.type_name}}</a></td>
+            <td>{{asset.type_quantity}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+{% endblock assettype %}
