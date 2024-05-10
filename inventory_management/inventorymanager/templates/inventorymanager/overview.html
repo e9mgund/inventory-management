@@ -3,6 +3,7 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'inventorymanger/overview.css' %}">
+<link rel="stylesheet" href="{% static 'inventorymanager/tables.css' %}">
 {% block content %}
 <div class="Uppercards">
         <div class="assetType card" onclick="typeShow()">
@@ -16,23 +17,21 @@
         </div>
 </div>
 
-<div class="hider" id="assettype">
 {% block assettype %}
 {% endblock assettype %}
-</div>
 
-<div id="asset" class="hider">Hiiiii</div>
+{% block assets %}
+{% endblock assets %}
 
 
 <script>
     function typeShow() {
-        document.getElementById("assettype").className = "table-container";
-        document.getElementById("asset").className = "hider";
+        window.location.href = "{% url 'inventorymanager:overview' %}"
     }
     function assetShow() {
-        // document.getElementById("assettype").className = "hider";
         // document.getElementById("asset").className = "block";
-        window.location.href = "{% url 'inventorymanager:assettype' %}"
+        window.location.href = "{% url 'inventorymanager:assets' %}"
+        // document.getElementById("assettype").className = "hider";
     }
 </script>
 {% endblock content %}
