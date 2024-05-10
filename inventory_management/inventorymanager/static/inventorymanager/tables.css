@@ -59,3 +59,16 @@ tr:hover{
 .hider {
     display: none;
 }
+
+#btn-new-field {
+    color: white;
+    background-color: green;
+    border-radius: 10px;
+    margin-right: 400px;
+    float: right;
+    margin-bottom: 10px;
+}
+
+/* #btn-new-field-id {
+    float: right;
+} */

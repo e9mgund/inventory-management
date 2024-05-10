@@ -3,6 +3,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'inventorymanager/tables.css' %}">
 {% block assets %}
+<div id="btn-new-field-div"><button id="btn-new-field" onclick="modelShow()">New Field +</button></div>
 <div class="table-container">
 <div class="table-inside">
     <table>
@@ -25,4 +26,17 @@
     </table>
     </div>
 </div>
+<div id="modal">
+    Hii vinay
+</div>
+<script>
+    function modelShow() {
+        document.getElementsByClassName("table-container")[0].className = "hider";
+    }
+    window.onclick = function(event) {
+    if (event.target == document.getElementsByClassName("table-container")) {
+        document.getElementsByClassName("table-container").className = "table-container";
+    }
+    }
+</script>
 {% endblock assets %}
