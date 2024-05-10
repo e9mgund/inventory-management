@@ -1,0 +1,27 @@
+{% extends 'inventorymanager/overview.html' %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'inventorymanager/tables.css' %}">
+
+{% block employees %}
+<div class="table-container">
+    <div class="table-inside">
+        <table>
+            <thead>
+                <th></th>
+                {% for heads in employees_tuple.1 %}
+                <th>{{heads}}</th>
+                {% endfor %}
+            </thead>
+            {% for employee , categories in employees_tuple.0.items %}
+            <tr>
+                <td><a class="first-col" href="#">{{employee}}</a></td>
+                {% for i , category in categories.items %}
+                <td>{{category}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+    </div>
+{% endblock employees %}

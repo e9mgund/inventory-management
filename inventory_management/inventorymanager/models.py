@@ -1,20 +1,15 @@
 from django.db import models
 
+from django.utils import timezone
+
 # Create your models here.
-
-class AssetType(models.Model) :
-    type_name = models.CharField(max_length=20)
-    type_quantity = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.type_name
 
 class Assets(models.Model) :
     equipment_id = models.CharField(max_length=30)
     equipment_name = models.CharField(max_length=30)
-    category = models.ForeignKey(
-        AssetType , on_delete=models.CASCADE
-    )
+    category = models.CharField(max_length=30)
+    employee = models.CharField(default="Not Assigned",max_length=30)
+    assigned_on = models.DateField(default=timezone.now)
 
     def __str__(self) :
-        return self.equipment_name
+        return self.equipment_id

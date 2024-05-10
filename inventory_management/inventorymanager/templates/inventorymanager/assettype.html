@@ -12,10 +12,10 @@
                 <th>Name</th>
                 <th>Quantity</th>
             </thead>
-            {% for asset in atypes_list %}
+            {% for name , quantity in atypes_dict.items %}
             <tr>
-                <td><a class="first-col" href="#">{{asset.type_name}}</a></td>
-                <td>{{asset.type_quantity}}</td>
+                <td><a class="first-col" href="#">{{name}}</a></td>
+                <td>{{quantity}}</td>
             </tr>
             {% endfor %}
         </table>

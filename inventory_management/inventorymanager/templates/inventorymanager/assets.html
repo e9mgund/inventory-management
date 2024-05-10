@@ -10,12 +10,16 @@
             <th>Equipment ID</th>
             <th>Equipment Name</th>
             <th>Category</th>
+            <th>Assigned to</th>
+            <th>Assigned on</th>
         </thead>
         {% for asset in assets_list %}
         <tr>
             <td><a class="first-col" href="#">{{asset.equipment_id}}</a></td>
             <td>{{asset.equipment_name}}</td>
             <td>{{asset.category}}</td>
+            <td>{{asset.employee}}</td>
+            <td>{{asset.assigned_on}}</td>
         </tr>
         {% endfor %}
     </table>

@@ -12,7 +12,7 @@
         <div class="assets card" onclick="assetShow()">
             Assets
         </div>
-        <div class="employees card">
+        <div class="employees card" onclick="employeeShow()">
             Employees
         </div>
 </div>
@@ -23,6 +23,9 @@
 {% block assets %}
 {% endblock assets %}
 
+{% block employees %}
+{% endblock employees %}
+
 
 <script>
     function typeShow() {
@@ -32,6 +35,9 @@
         // document.getElementById("asset").className = "block";
         window.location.href = "{% url 'inventorymanager:assets' %}"
         // document.getElementById("assettype").className = "hider";
+    }
+    function employeeShow() {
+        window.location.href = "{% url 'inventorymanager:employees' %}"
     }
 </script>
 {% endblock content %}
