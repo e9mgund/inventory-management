@@ -5,20 +5,22 @@
 <link rel="stylesheet" href="{% static 'inventorymanager/tables.css' %}">
 
 {% block assettype %}
-<div class="table-container" id="assettype">
-    <div class="table-inside">
-        <table>
+    <div class="custom-display">
+        <div class="table-wrapper-custom">
+        <table class="table table-hover custom-table">
             <thead>
+                <th><input onclick="toggle(this)" type="checkbox" class="form-check-input"></th>
                 <th>Name</th>
                 <th>Quantity</th>
             </thead>
             {% for name , quantity in atypes_dict.items %}
             <tr>
+                <td><input name="checkbox" type="checkbox" class="form-check-input"></td>
                 <td><a class="first-col" href="#">{{name}}</a></td>
                 <td>{{quantity}}</td>
             </tr>
             {% endfor %}
         </table>
-        </div>
+</div>
 </div>
 {% endblock assettype %}

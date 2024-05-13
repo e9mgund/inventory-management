@@ -3,6 +3,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views import generic
 from .models import Assets
+from .forms import AssetsForm
 
 # Create your views here.
 def LoginView(request):
@@ -45,3 +46,26 @@ class EmployeesView(generic.ListView) :
                 out[i.employee] = {j:0 for j in sorted(categories)}
             out[i.employee][i.category] += 1
         return (out,sorted(categories))
+
+
+class NewEntryView(generic.edit.CreateView):
+    model = Assets
+    fields = '__all__'
+
+def newFill(request):
+    form = AssetsForm
+
+    if request.method == "GET":
+        return render(request,"inventorymanager/new_entry.html")
+
+    if request.method == "POST":
+        form = AssetsForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            context = {"Error":"Error ocurred."}
+            return render(request,"inventorymanager/new_entry.html",context)
+    context = {"form": form}
+    return render(request, "inventorymanager/new_entry.html", context)
+
+generic.FormView

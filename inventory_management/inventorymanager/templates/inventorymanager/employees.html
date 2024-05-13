@@ -4,10 +4,11 @@
 <link rel="stylesheet" href="{% static 'inventorymanager/tables.css' %}">
 
 {% block employees %}
-<div class="table-container">
-    <div class="table-inside">
-        <table>
+    <div class="custom-display">
+        <div class="table-wrapper-custom">
+        <table class="table table-hover custom-table">
             <thead>
+                <th><input onclick="toggle(this)" type="checkbox" class="form-check-input"></th>
                 <th></th>
                 {% for heads in employees_tuple.1 %}
                 <th>{{heads}}</th>
@@ -15,6 +16,7 @@
             </thead>
             {% for employee , categories in employees_tuple.0.items %}
             <tr>
+                <td><input name="checkbox" type="checkbox" class="form-check-input"></td>
                 <td><a class="first-col" href="#">{{employee}}</a></td>
                 {% for i , category in categories.items %}
                 <td>{{category}}</td>
@@ -22,6 +24,6 @@
             </tr>
             {% endfor %}
         </table>
-        </div>
+    </div>
     </div>
 {% endblock employees %}

@@ -11,5 +11,6 @@ urlpatterns = [
     path("register/",generic.TemplateView.as_view(template_name="inventorymanager/register.html"),name="register"),
     path("settings/",generic.TemplateView.as_view(template_name="inventorymanager/settings.html")),
     path("assets/",views.AssetsView.as_view(),name="assets"),
-    path("employees/",views.EmployeesView.as_view(),name="employees")
+    path("employees/",views.EmployeesView.as_view(),name="employees"),
+    path("new/",views.newFill,name="new"),
 ]
