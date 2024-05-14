@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 <body>
-    <form action="" method="post">
+    <form action="" method="post" class="row g-12">
         {% csrf_token %}
-    <!-- <label for="id">Equipment ID</label>
-    <input type="text" name="id"><br>
-    <label for="name">Equipment Name</label>
-    <input type="text" name="name"><br>
+    <div class="col-md-6">
+    <label for="id" class="form-label" >Equipment ID</label>
+    <input type="text" id="id" class="form-control" >
+    </div>
+    <div class="col-md-6">
+    <label for="name" class="form-label" >Equipment Name</label>
+    <input type="text" name="name" class="form-control" >
+    </div>
+    <!--
     <label for="category">Category</label>
     <input type="text" name="catgeory"><br>
     <label for="employee">Assigned to</label>
@@ -19,7 +27,10 @@
     <label for="assigned_date">Assigned on</label>
     <input type="date" name="assigned_date"><br>
     <input type="submit" value="Submit"> -->
+    {{form.as_p}}
+    <input type="submit" value="submit">
     </form>
-    {{form}}
 </body>
 </html>
+
+<script></script>

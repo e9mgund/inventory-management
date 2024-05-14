@@ -55,8 +55,8 @@ class NewEntryView(generic.edit.CreateView):
 def newFill(request):
     form = AssetsForm
 
-    if request.method == "GET":
-        return render(request,"inventorymanager/new_entry.html")
+    # if request.method == "GET":
+    #     return render(request,"inventorymanager/new_entry.html")
 
     if request.method == "POST":
         form = AssetsForm(request.POST)
