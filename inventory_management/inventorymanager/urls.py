@@ -13,4 +13,5 @@ urlpatterns = [
     path("assets/",views.AssetsView.as_view(),name="assets"),
     path("employees/",views.EmployeesView.as_view(),name="employees"),
     path("new/",views.newFill,name="new"),
+    path("newbase/",generic.TemplateView.as_view(template_name="inventorymanager/new_base.html")),
 ]
