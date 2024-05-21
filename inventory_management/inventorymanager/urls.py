@@ -6,7 +6,7 @@ from django.views import generic
 app_name = "inventorymanager"
 
 urlpatterns = [
-    path("",views.AssetTypeView.as_view(),name="overview"),
+    path("overview/",views.AssetTypeView.as_view(),name="overview"),
     path("login/",generic.TemplateView.as_view(template_name="inventorymanager/login.html")),
     path("register/",generic.TemplateView.as_view(template_name="inventorymanager/register.html"),name="register"),
     path("settings/",generic.TemplateView.as_view(template_name="inventorymanager/settings.html")),

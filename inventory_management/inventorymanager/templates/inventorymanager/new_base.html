@@ -15,6 +15,13 @@
         #navbar {
             height: 100vh;
         }
+        .entries {
+            padding-left: 1.125rem;
+            padding-right: 2.125rem;
+            margin-right: 0.25rem;
+            max-width: 4.5rem;
+        }
+
     </style>
 </head>
 <body>
@@ -43,21 +50,102 @@
         <div class="container-fluid">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4 mb-4">Dashboard</h1>
-                    <div class="row">
+                    <div class="row mt-4 mb-4">
                         <div class="col-xl-4 col-md-12">
-                            <div class="card bg-primary text-white mb-4">
-                                <div class="card-body">Asset Types: </div>
+                            <div class="card bg-body-tertiary text-black mb-4">
+                                <div class="d-flex justify-content-between card-body fw-bold">
+                                    <div>
+                                        Asset Types
+                                    </div>
+                                    <div>
+                                        6
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-xl-4 col-md-12">
-                            <div class="card bg-danger text-white mb-4">
-                                <div class="card-body">Assets: </div>
+                            <div class="card bg-body-tertiary text-black mb-4">
+                                <div class="d-flex justify-content-between card-body fw-bold">
+                                    <div>
+                                        Assets
+                                    </div>
+                                    <div>
+                                        20
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-xl-4 col-md-12">
-                            <div class="card bg-warning text-white mb-4">
-                                <div class="card-body">Employees: </div>
+                            <div class="card bg-body-tertiary text-black mb-4">
+                                <div class="d-flex justify-content-between card-body fw-bold">
+                                    <div>
+                                        Employees
+                                    </div>
+                                    <div>
+                                        16
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid px-4">
+                    <div class="card mb-4">
+                        <div class="card-header"><i class="bi bi-table"></i> </div>
+                        <div class="card-body">
+                            <div class="">
+                                <div class="d-flex justify-content-between mb-3">
+                                        <label for="" class="d-flex">
+                                            <select name="" id="" class="form-select entries">
+                                                <option value="5">5</option>
+                                                <option value="10" selected>10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                            <span class="m-1">entries per page</span>
+                                        </label>
+                                        <input type="search" placeholder="Search..." title="search within table" aria-label="Search" class="form-control form-control-sm w-25" >
+                                </div>
+                                <div class="mb-1">
+                                    <table class="table table-hover table-bordered fw-normal">
+                                        <thead>
+                                            <th>Equipment ID</th>
+                                            <th>Equipment</th>
+                                            <th>Category</th>
+                                            <th>Assigned to</th>
+                                            <th>Assigned on</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td><a class="first-col" href="#">001</a></td>
+                                                <td>CPU</td>
+                                                <td>Hardware</td>
+                                                <td>Not Assigned</td>
+                                                <td>May 10, 2024</td>
+                                            </tr>
+                                            <tr><td><a class="first-col" href="#">002</a></td>
+                                                <td>Chair</td>
+                                                <td>Office Utility</td>
+                                                <td>Not Assigned</td>
+                                                <td>May 10, 2024</td>
+                                            </tr>
+                                            <tr><td><a class="first-col" href="#">003</a></td>
+                                                <td>Monitor</td>
+                                                <td>Hardware</td>
+                                                <td>Not Assigned</td>
+                                                <td>May 10, 2024</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="d-flex justify-content-between mb-0">
+                                    <div>Showing 1 to 3 of 3 entries</div>
+                                    <div><ul class="pagination">
+                                        <li class="page-item"><a href="" class="page-link"><</a></li>
+                                        <li class="page-item"><a href="" class="page-link">1</a></li>
+                                        <li class="page-item"><a href="" class="page-link">2</a></li>
+                                        <li class="page-item"><a href="" class="page-link">></a></li>
+                                    </ul></div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
