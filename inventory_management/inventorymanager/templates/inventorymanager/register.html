@@ -20,29 +20,30 @@
     <div id="container" class="container-md my-5">
         <div id="lower" class="">
             <div id="innerlower" class="d-flex justify-content-center">
-                <form id="form-container" autocomplete="off" action="" class="row g-3">
+                <form id="form-container" autocomplete="off" method="post" class="row g-3">
+                    {% csrf_token %}
                     <div id="welcome" class="col-md-12 text-center">
                         <h2 class="mb-3">Create an account</h1>
                     </div>
                     <div class="col-md-6">
                         <label for="firstname" class="form-label">First Name <span style="color: red;">*</span></label>
-                        <input name="firstname" type="text" class="form-control">
+                        <input name="first_name" type="text" class="form-control">
                     </div>
                     <div class="col-md-6">
                         <label for="lastname" class="form-label">Last Name <span style="color: red;">*</span></label>
-                        <input name="lastname" type="text" class="form-control">
+                        <input name="last_name" type="text" class="form-control">
                     </div>
                     <div class="col-md-12">
                         <label for="companyname" class="form-label">Company Name <span style="color: red;">*</span></label>
-                        <input name="companyname" type="text" class="form-control">
+                        <input name="compname" type="text" class="form-control">
                     </div>
                     <div class="col-md-12">
                         <label for="email" class="form-label">Email <span style="color: red;">*</span></label>
                         <input name="email" type="email" class="form-control">
                     </div>
                     <div class="col-md-6">
-                        <label for="password" class="form-label">Password <span style="color: red;">*</span></label>
-                        <input name="password" type="password" class="form-control">
+                        <label for="password1" class="form-label">Password <span style="color: red;">*</span></label>
+                        <input name="password1" type="password" class="form-control">
                     </div>
                     <div class="col-md-6">
                         <label for="password2" class="form-label">Password Again <span style="color: red;">*</span></label>

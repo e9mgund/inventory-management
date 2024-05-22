@@ -1,9 +1,12 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.views import generic
-from .models import Assets
-from .forms import AssetsForm
+from .models import Assets , CustomUser
+from .forms import AssetsForm , RegistrationForm
+from django.contrib.auth import login , get_user_model, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
 
 # Create your views here.
 def LoginView(request):
@@ -68,4 +71,27 @@ def newFill(request):
     context = {"form": form}
     return render(request, "inventorymanager/new_entry.html", context)
 
-generic.FormView
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # login(request,user)
+            return redirect('inventorymanager:newbase')
+        else:
+            return render(request,'inventorymanager/register.html',{'error':form.errors})
+    else :
+        form = RegistrationForm()
+    return render(request,'inventorymanager/register.html',{'form':form})
+
+def Login(request):
+    email = request.POST.get("email")
+    password = request.POST.get("password")
+
+    try:
+        user = CustomUser.objects.get(email=email)
+    except:
+        print(messages.error)
+    
+    if user is not None:
+        return redirect('inventorymanager:newbase')

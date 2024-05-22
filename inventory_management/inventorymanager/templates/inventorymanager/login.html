@@ -19,17 +19,18 @@
     <div id="container" class="container-md my-5">
         <div id="lower" class="">
             <div id="innerlower" class="d-flex justify-content-center">
-                <form id="form-container" autocomplete="off" action="" class="row g-3">
+                <form id="form-container" autocomplete="off" action="" class="row g-3" method="post">
+                    {% csrf_token %}
                     <div id="welcome" class="col-md-12 text-center">
                         <h2 class="mb-3">Login</h1>
                     </div>
                     <div class="col-md-12">
-                        <label for="companyname" class="form-label">Email ID <span style="color: red;">*</span></label>
-                        <input name="companyname" type="text" class="form-control">
+                        <label for="email" class="form-label">Email ID <span style="color: red;">*</span></label>
+                        <input name="email" type="email" class="form-control">
                     </div>
                     <div class="col-md-12">
-                        <label for="email" class="form-label">Password <span style="color: red;">*</span></label>
-                        <input name="email" type="email" class="form-control">
+                        <label for="password" class="form-label">Password <span style="color: red;">*</span></label>
+                        <input name="password" type="password" class="form-control">
                     </div>
                     <div class="col-md-12">
                         <input type="submit" value="Login" class="form-control btn btn-primary">
@@ -38,5 +39,6 @@
             </div>
         </div>
     </div>
+    {{form.errors}}
 </body>
 </html>
