@@ -1,19 +1,15 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect , get_object_or_404
 from django.views import generic
-from .models import Assets , CustomUser
-from .forms import AssetsForm , RegistrationForm
+from .models import Assets
+from .forms import AssetsForm , UserRegisterForm
 from django.contrib.auth import login , get_user_model, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from django.http import JsonResponse
 
 # Create your views here.
-def LoginView(request):
-    if request.method == "POST":
-        pass
-    else:
-        return render(request,"inventorymanager/register.html")
 
 class AssetTypeView(generic.ListView) :
     template_name = "inventorymanager/assettype.html"
@@ -51,6 +47,13 @@ class EmployeesView(generic.ListView) :
         return (out,sorted(categories))
 
 
+class RecordsView(generic.ListView):
+    template_name = "inventorymanager/newbase.html"
+    context_object_name = "records"
+
+    def get_queryset(self) -> QuerySet[Any]:
+        return Assets.objects.all()
+
 class NewEntryView(generic.edit.CreateView):
     model = Assets
     fields = '__all__'
@@ -73,25 +76,45 @@ def newFill(request):
 
 def register(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
             # login(request,user)
             return redirect('inventorymanager:newbase')
         else:
             return render(request,'inventorymanager/register.html',{'error':form.errors})
     else :
-        form = RegistrationForm()
+        form = UserRegisterForm()
     return render(request,'inventorymanager/register.html',{'form':form})
 
 def Login(request):
-    email = request.POST.get("email")
-    password = request.POST.get("password")
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request,username=username,password=password)
+        if user is not None:
+            form = login(request,user)
+            messages.success(request,'Welcome')
+            return redirect('inventorymanager:overview')
+        else:
+            messages.info(request,'account Does not exist')
+    form = AuthenticationForm()
+    return render(request,'inventorymanager/login.html',{'form':form})
 
-    try:
-        user = CustomUser.objects.get(email=email)
-    except:
-        print(messages.error)
-    
-    if user is not None:
-        return redirect('inventorymanager:newbase')
+def editfield(request, pk):
+    record = get_object_or_404(Assets,pk=pk)
+    if request.method == 'POST':
+        form = AssetsForm(request.POST,instance=Assets)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'success':True})
+    else:
+        form = AssetsForm(instance=Assets)
+    return render(request,'inventorymanager/editblock.html',{'form':form,'record':record})
+
+def deletefield(request, pk):
+    record = get_object_or_404(Assets,pk=pk)
+    if request.method == 'POST':
+        record.delete()
+        return JsonResponse({'success':True})
+    return render(request,'inventorymanager/deleteblock.html',{'record':record})
