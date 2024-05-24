@@ -98,6 +98,7 @@
                                 <div class="mb-3">
                                     <div class="d-container">
                                         <nav class="d-flex justify-content-end">
+                                            <a href="" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#addModal">Add New</a>
                                             <form class="d-flex" role="search">
                                                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                                                 <button class="btn btn-outline-secondary" type="submit">Search</button>
@@ -111,10 +112,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Equipment ID</th>
-                                                <th>Equipment</th>
+                                                <th>Equipment Bar code</th>
+                                                <th>Equipment Name</th>
+                                                <th>Description</th>
                                                 <th>Category</th>
-                                                <th>Assigned to</th>
-                                                <th>Assigned on</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -122,10 +123,10 @@
                                             {% for record in records %}
                                             <tr>
                                                 <td><a class="first-col" href="#">{{ record.equipment_id }}</a></td>
+                                                <td>{{ record.equipment_code }}</td>
                                                 <td>{{ record.equipment_name }}</td>
-                                                <td>{{ record.category }}</td>
-                                                <td>{{ record.employee }}</td>
-                                                <td>{{ record.assigned_on }}</td>
+                                                <td>{{ record.description }}</td>
+                                                <td>{{ record.category_name }}</td>
                                                 <td>
                                                     <button type="button" data-id="{{ record.id }}" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">
                                                         Edit
@@ -147,6 +148,51 @@
             </main>
         </div>
     </div>
+    <!-- Add Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalTitle">Add New Entry</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addForm" method="POST" action="{% url 'inventorymanager:addfield' %}">
+                    {% csrf_token %}
+                    {{add_form}}
+                    <!-- <div class="mb-3">
+                        <label for="equipment_id" class="form-label">Equipment ID</label>
+                        <input type="text" class="form-control" id="equipment_id" name="equipment_id">
+                    </div>
+                    <div class="mb-3">
+                        <label for="equipment_name" class="form-label">Equipment Name</label>
+                        <input type="text" class="form-control" id="equipment_name" name="equipment_name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <input type="text" class="form-control" id="category" name="category">
+                    </div>
+                    <div class="mb-3">
+                        <label for="employee" class="form-label">Assigned to</label>
+                        <input type="text" class="form-control" id="employee" name="employee">
+                    </div>
+                    <div class="mb-3">
+                        <label for="assigned_on" class="form-label">Assigned on</label>
+                        <input type="date" class="form-control" id="assigned_on" name="assigned_on">
+                    </div> -->
+                    <button type="submit" class="btn btn-primary" id="addEntry">Save changes</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
     <!-- Edit Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -156,15 +202,42 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editForm">
+                    <form id="editForm" method="post">
                         {% csrf_token %}
-                        <!-- Form fields will be injected here via AJAX -->
+                        <input type="hidden" id="edit_record_id" name="record_id">
+                        <div class="mb-3">
+                            <label for="edit_equipment_id" class="form-label">Equipment ID</label>
+                            <input type="text" class="form-control" id="edit_equipment_id" name="equipment_id">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_equipment_code" class="form-label">Equipment code</label>
+                            <input type="text" class="form-control" id="edit_equipment_code" name="equipment_code">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_equipment_name" class="form-label">Equipment name</label>
+                            <input type="text" class="form-control" id="edit_equipment_name" name="equipment_name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_description" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="edit_description" name="description">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_category" class="form-label">Category</label>
+                            <!-- <input type="text" class="form-control" id="edit_category_name" name="category_name"> -->
+                            <select name="" id="" class="form-control">
+                                <option value="" id="edit_category_name" class="form-select"></option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" id="saveChanges">Save changes</button>
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <!-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -190,16 +263,52 @@
 
     <script>
         $(document).ready(function() {
+            $('#addModal').on('show.bs.modal', function(event) {
+                $('#addForm').trigger('reset');
+            });
+
+            $('#addEntry').click(function() {
+            var form = $('#addForm');
+            $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                data: form.serialize(),
+                success: function(data) {
+                    if (data.success) {
+                        // If successfully added, reload the page
+                        location.reload();
+                    }
+                },
+                error: function(xhr, errmsg, err) {
+                    console.log(xhr.status + ": " + xhr.responseText);
+                    // Optionally, show error messages in the modal
+                    // alert("Error occurred. Please try again later.");
+                }
+            });
+        });
+
             $('#editModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var recordId = button.data('id');
                 var modal = $(this);
-                $.ajax({
-                    url: '{% url "inventorymanager:editfield" 0 %}'.replace('0', recordId),
-                    success: function(data) {
-                        modal.find('.modal-body #editForm').html(data);
-                    }
-                });
+                // $.ajax({
+                //     url: '{% url "inventorymanager:editfield" 0 %}'.replace('0', recordId),
+                //     success: function(data) {
+                //         modal.find('.modal-body #editForm').html(data);
+                //     }
+                // });
+                $.getJSON("{% url 'inventorymanager:getfield' 0 %}".replace('0', recordId), function(data) {
+                    // console.log("inside json");
+                $('#edit_record_id').val(data.id);
+                $('#edit_equipment_id').val(data.equipment_id);
+                $('#edit_equipment_code').val(data.equipment_code);
+                $('#edit_equipment_name').val(data.equipment_name);
+                $('#edit_description').val(data.description);
+                $('#edit_category_name').text(data.category_name);
+                $('#edit_category_name').attr('value',data.category_name);
+                // Update the form action URL
+                $('#editForm').attr('action', '{% url "inventorymanager:editfield" 0 %}'.replace('0', recordId));
+            });
             });
 
             $('#saveChanges').click(function() {
@@ -209,9 +318,13 @@
                     type: 'POST',
                     data: form.serialize(),
                     success: function(data) {
+                        console.log(data,"onedit");
                         if (data.success) {
                             location.reload();
                         }
+                    },
+                    error:function(xhr,errmsg,err) {
+                        console.log(xhr.status,xhr.responseText);
                     }
                 });
             });

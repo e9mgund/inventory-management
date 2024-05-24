@@ -16,4 +16,6 @@ urlpatterns = [
     path("newbase/",views.RecordsView.as_view(),name='newbase'),
     path("editfield/<int:pk>/",views.editfield,name='editfield'),
     path("deletefield/<int:pk>/",views.deletefield,name='deletefield'),
+    path('getfield/<int:record_id>/', views.getfield, name='getfield'),
+    path('addfield/',views.addfield, name="addfield"),
 ]

@@ -7,7 +7,11 @@ from .forms import AssetsForm , UserRegisterForm
 from django.contrib.auth import login , get_user_model, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse , HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+
 
 # Create your views here.
 
@@ -74,6 +78,18 @@ def newFill(request):
     context = {"form": form}
     return render(request, "inventorymanager/new_entry.html", context)
 
+def addfield(request):
+    if request.method == 'POST':
+        form = AssetsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'success':True})
+        else:
+            return JsonResponse({'errors':form.errors})
+    else:
+        form = AssetsForm()
+    return render(request,'inventorymanager/addblock.html',{'add_form':form})
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -104,10 +120,12 @@ def Login(request):
 def editfield(request, pk):
     record = get_object_or_404(Assets,pk=pk)
     if request.method == 'POST':
-        form = AssetsForm(request.POST,instance=Assets)
+        form = AssetsForm(request.POST,instance=record)
         if form.is_valid():
             form.save()
             return JsonResponse({'success':True})
+        else:
+            return JsonResponse({'success':False,'error':form.errors},status=400)
     else:
         form = AssetsForm(instance=Assets)
     return render(request,'inventorymanager/editblock.html',{'form':form,'record':record})
@@ -118,3 +136,15 @@ def deletefield(request, pk):
         record.delete()
         return JsonResponse({'success':True})
     return render(request,'inventorymanager/deleteblock.html',{'record':record})
+
+def getfield(request, record_id):
+    record = get_object_or_404(Assets, id=record_id)
+    data = {
+        'id': record.id,
+        'equipment_id': record.equipment_id,
+        'equipment_name': record.equipment_name,
+        'equipment_code': record.equipment_code,
+        'description': record.description,
+        'category_name': record.category_name.category_name
+    }
+    return JsonResponse(data)
