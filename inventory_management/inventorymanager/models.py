@@ -12,6 +12,7 @@ class Categories(models.Model) :
     def __str__(self):
         return self.category_name
 
+
 class Assets(models.Model) :
     equipment_id = models.CharField(max_length=30)
     equipment_code = models.CharField(default=None,max_length=100,unique=True)
@@ -20,7 +21,8 @@ class Assets(models.Model) :
     category_name = models.ForeignKey(Categories,on_delete=models.CASCADE)
 
     def __str__(self) :
-        return self.equipment_id
+        return self.equipment_name
+
 
 class CustomUser(models.Model):
     user = models.OneToOneField(User,default="", on_delete=models.CASCADE)

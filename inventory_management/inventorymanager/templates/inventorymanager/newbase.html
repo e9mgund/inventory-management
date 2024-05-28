@@ -26,8 +26,8 @@
     </style>
 </head>
 <body>
-    <div class="d-flex">
-        <div id="nav-wrapper">
+    <div class="row">
+        <div id="nav-wrapper" class="col-xl-2 col-md-12">
             <div id="navbar" class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
                 <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                     <img src="{% static 'inventorymanager/enine_logo.jpeg' %}" alt="logo" width="40" class="bi pe-none me-2">
@@ -39,51 +39,69 @@
                         <a href="{% url 'inventorymanager:newbase' %}" class="nav-link link-body-emphasis"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a>
                     </li>
                     <li>
+                        <p></p>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link link-body-emphasis"><i class="bi bi-table me-2"></i> Inventory</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link link-body-emphasis"><i class="bi bi-table me-2"></i> Allocated</a>
+                    </li>
+                    <li>
+                        <p></p>
+                    </li>
+                    <li>
                         <a href="#" class="nav-link link-body-emphasis"><i class="bi bi-people-fill me-2"></i> Groups</a>
                     </li>
                     <li>
                         <a href="#" class="nav-link link-body-emphasis"><i class="bi bi-gear-fill me-2"></i> Settings</a>
                     </li>
+                    <li>
+                        <a href="{% url 'inventorymanager:logout' %}">Logout</a>
+                    </li>
                 </ul>
                 <hr>
             </div>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid col-xl-10 col-md-12">
             <main>
                 <div class="container-fluid px-4">
-                    <div class="row mt-4 mb-4">
-                        <div class="col-xl-4 col-md-12">
-                            <div class="card bg-body-tertiary text-black mb-4">
-                                <div class="d-flex justify-content-between card-body fw-bold">
-                                    <div>
-                                        Asset Types
+                    <div class="row mt-4 mb-4 justify-content-around">
+                        <div class="col-xl-2 col-md-12">
+                            <div class="card text-black mb-4">
+                                <div class="row card-body text-center">
+                                    <div class="fs-1 text-primary" id="totalAssets">
+                                        {{Asset_count}}
                                     </div>
-                                    <div>
-                                        6
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-md-12">
-                            <div class="card bg-body-tertiary text-black mb-4">
-                                <div class="d-flex justify-content-between card-body fw-bold">
-                                    <div>
-                                        Assets
-                                    </div>
-                                    <div>
-                                        20
+                                    <div class="fs-6 mt-2 text-secondary">Assets</div>
+                                    <div class="fs-4 fw-bold">
+                                        In the Inventory
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-md-12">
-                            <div class="card bg-body-tertiary text-black mb-4">
-                                <div class="d-flex justify-content-between card-body fw-bold">
-                                    <div>
-                                        Employees
+                        <div class="col-xl-2 col-md-12">
+                            <div class="card text-black mb-4">
+                                <div class="row card-body text-center">
+                                    <div class="fs-1 text-success">
+                                        {{Allocated_records}}
                                     </div>
-                                    <div>
-                                        16
+                                    <div class="fs-6 mt-2 text-secondary">Assets</div>
+                                    <div class="fs-4 fw-bold">
+                                        Allocated
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-md-12">
+                            <div class="card text-black mb-4">
+                                <div class="row card-body text-center">
+                                    <div class="fs-1 text-danger">
+                                        3
+                                    </div>
+                                    <div class="fs-6 mt-2 text-secondary">Categories</div>
+                                    <div class="fs-4 fw-bold">
+                                        On Low stock
                                     </div>
                                 </div>
                             </div>
@@ -92,22 +110,22 @@
                 </div>
                 <div class="container-fluid px-4">
                     <div class="card mb-4">
-                        <div class="card-header"><i class="bi bi-table"></i> </div>
+                        <div class="card-header"><i class="bi bi-table me-2"></i> Inventory</div>
                         <div class="card-body">
                             <div class="">
                                 <div class="mb-3">
                                     <div class="d-container">
                                         <nav class="d-flex justify-content-end">
-                                            <a href="" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#addModal">Add New</a>
-                                            <form class="d-flex" role="search">
+                                            <a href="{% url 'inventorymanager:newasset' %}" class="btn btn-outline-success me-2">Add New</a>
+                                            <!-- <form class="d-flex" role="search">
                                                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                                                 <button class="btn btn-outline-secondary" type="submit">Search</button>
-                                            </form>
+                                            </form> -->
                                         </nav>
                                     </div>
                                 </div>
                                 <div class="mb-1">
-                                    {% if records %}
+                                    {% if Asset_records %}
                                     <table class="table table-hover table-bordered fw-normal">
                                         <thead>
                                             <tr>
@@ -120,7 +138,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for record in records %}
+                                            {% for record in Asset_records %}
                                             <tr>
                                                 <td><a class="first-col" href="#">{{ record.equipment_id }}</a></td>
                                                 <td>{{ record.equipment_code }}</td>
@@ -149,7 +167,7 @@
         </div>
     </div>
     <!-- Add Modal -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -157,10 +175,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addForm" method="POST" action="{% url 'inventorymanager:addfield' %}">
+                <form id="addForm" method="POST" action="">
                     {% csrf_token %}
-                    {{add_form}}
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label for="equipment_id" class="form-label">Equipment ID</label>
                         <input type="text" class="form-control" id="equipment_id" name="equipment_id">
                     </div>
@@ -179,7 +196,7 @@
                     <div class="mb-3">
                         <label for="assigned_on" class="form-label">Assigned on</label>
                         <input type="date" class="form-control" id="assigned_on" name="assigned_on">
-                    </div> -->
+                    </div>
                     <button type="submit" class="btn btn-primary" id="addEntry">Save changes</button>
                 </form>
             </div>
@@ -188,7 +205,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 
