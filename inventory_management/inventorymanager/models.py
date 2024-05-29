@@ -19,6 +19,7 @@ class Assets(models.Model) :
     equipment_name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     category_name = models.ForeignKey(Categories,on_delete=models.CASCADE)
+    in_out = models.BooleanField(default=False)
 
     def __str__(self) :
         return self.equipment_name
@@ -30,17 +31,22 @@ class CustomUser(models.Model):
 
 
 class Transactions(models.Model) :
-    Transaction_ID = models.CharField(max_length=20)
-    equipment_ID = models.ForeignKey(Assets,to_field='equipment_code',on_delete=models.CASCADE)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    T_types = (("IN","IN"),("OUT","OUT"))
-    Transaction_type = models.CharField(choices=T_types,max_length=3)
+    equipment_ID = models.ForeignKey(Assets,on_delete=models.CASCADE)
+    user = models.CharField(max_length=50,default="Not Assigned")
+    T_types = (("IN","IN"),("OUT","OUT"),("EDIT","EDIT"))
+    Transaction_type = models.CharField(choices=T_types,max_length=5)
     Transaction_date = models.DateField(default=timezone.now)
     category_name = models.ForeignKey(Categories,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user
 
 
 class Allocated(models.Model) :
     equipment_id = models.ForeignKey(Assets,on_delete=models.CASCADE)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.CharField(max_length=30)
     assigned_on = models.DateField(default=timezone.now)
     category_name = models.ForeignKey(Categories,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user

@@ -42,7 +42,7 @@
                         <p></p>
                     </li>
                     <li>
-                        <a href="#" class="nav-link link-body-emphasis"><i class="bi bi-table me-2"></i> Inventory</a>
+                        <a href="{% url 'inventorymanager:newbase' %}" class="nav-link link-body-emphasis"><i class="bi bi-table me-2"></i> Inventory</a>
                     </li>
                     <li>
                         <a href="{% url 'inventorymanager:allocated' %}" class="nav-link link-body-emphasis"><i class="bi bi-table me-2"></i> Allocated</a>
@@ -84,7 +84,7 @@
                             <div class="card text-black mb-4">
                                 <div class="row card-body text-center">
                                     <div class="fs-1 text-success">
-                                        {{Allocated_records}}
+                                        {{Allocated_count}}
                                     </div>
                                     <div class="fs-6 mt-2 text-secondary">Assets</div>
                                     <div class="fs-4 fw-bold">
@@ -110,13 +110,13 @@
                 </div>
                 <div class="container-fluid px-4">
                     <div class="card mb-4">
-                        <div class="card-header"><i class="bi bi-table me-2"></i> Inventory</div>
+                        <div class="card-header"><i class="bi bi-table me-2"></i> Allocated</div>
                         <div class="card-body">
                             <div class="">
                                 <div class="mb-3">
                                     <div class="d-container">
                                         <nav class="d-flex justify-content-end">
-                                            <a href="{% url 'inventorymanager:newasset' %}" class="btn btn-outline-success me-2">Add New</a>
+                                            <a href="{% url 'inventorymanager:newallocation' %}" class="btn btn-outline-success me-2">Assign</a>
                                             <!-- <form class="d-flex" role="search">
                                                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                                                 <button class="btn btn-outline-secondary" type="submit">Search</button>
@@ -125,32 +125,30 @@
                                     </div>
                                 </div>
                                 <div class="mb-1">
-                                    {% if Asset_records %}
+                                    {% if Allocated_records %}
                                     <table class="table table-hover table-bordered fw-normal">
                                         <thead>
                                             <tr>
-                                                <th>Equipment ID</th>
-                                                <th>Equipment Bar code</th>
                                                 <th>Equipment Name</th>
-                                                <th>Description</th>
+                                                <th>Employee</th>
+                                                <th>Assigned on</th>
                                                 <th>Category</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for record in Asset_records %}
+                                            {% for record in Allocated_records %}
                                             <tr>
                                                 <td><a class="first-col" href="#">{{ record.equipment_id }}</a></td>
-                                                <td>{{ record.equipment_code }}</td>
-                                                <td>{{ record.equipment_name }}</td>
-                                                <td>{{ record.description }}</td>
+                                                <td>{{ record.user }}</td>
+                                                <td>{{ record.assigned_on }}</td>
                                                 <td>{{ record.category_name }}</td>
                                                 <td>
-                                                    <button type="button" data-id="{{ record.id }}" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">
+                                                    <!-- <button type="button" data-id="{{ record.id }}" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">
                                                         Edit
-                                                    </button>
+                                                    </button> -->
                                                     <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ record.id }}">
-                                                        Delete
+                                                        Confiscate
                                                     </button>
                                                 </td>
                                             </tr>
@@ -240,10 +238,10 @@
                         </div>
                         <div class="mb-3">
                             <label for="edit_category" class="form-label">Category</label>
-                            <input type="text" class="form-control" id="edit_category_name" name="category_name">
-                            <!-- <select name="category_name" id="" class="form-control">
+                            <!-- <input type="text" class="form-control" id="edit_category_name" name="category_name"> -->
+                            <select name="" id="" class="form-control">
                                 <option value="" id="edit_category_name" class="form-select"></option>
-                            </select> -->
+                            </select>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -268,11 +266,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete this record?
+                    Are you sure you want to confiscate this asset?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Confiscate</button>
                 </div>
             </div>
         </div>
@@ -314,7 +312,7 @@
                 //         modal.find('.modal-body #editForm').html(data);
                 //     }
                 // });
-                $.getJSON("{% url 'inventorymanager:getfield' 0 %}".replace('0', recordId), function(data) {
+                $.getJSON("{% url 'inventorymanager:getallocatedfield' 0 %}".replace('0', recordId), function(data) {
                     // console.log("inside json");
                 $('#edit_record_id').val(data.id);
                 $('#edit_equipment_id').val(data.equipment_id);
@@ -355,7 +353,7 @@
             $('#confirmDelete').click(function() {
                 var recordId = $(this).data('id');
                 $.ajax({
-                    url: '{% url "inventorymanager:deletefield" 0 %}'.replace('0', recordId),
+                    url: '{% url "inventorymanager:deleteallocated" 0 %}'.replace('0', recordId),
                     type: 'POST',
                     data: {
                         'id': recordId,
