@@ -54,8 +54,8 @@
                 </li>
               </ul>
         </div>
-        <div id="nav-wrapper" class="col-xl-2 col-md-2 sidebar">
-            <div id="nav-side" class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+        <div id="nav-wrapper" class="col-xl-2 sidebar">
+            <div id="nav-side" class="d-flex flex-column flex-shrink-0 p-3 bg-light">
                 <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                     <img src="{% static 'inventorymanager/enine_logo.jpeg' %}" alt="logo" width="40" class="bi pe-none me-2">
                     <span class="fs-4">1E9 Advisors</span>
@@ -90,6 +90,7 @@
                 <hr>
             </div>
         </div>
+        <div class="container col-xl-10 col-md-12 d-inline-flex justify-content-center">
             <form id="editForm" method="post" class="row mt-5 col-xl-10 col-md-10">
                 {% csrf_token %}
                 <div id="welcome" class="col-md-12 text-center">
@@ -134,6 +135,7 @@
                     <input type="submit" value="Submit" class="form-control btn btn-primary">
                 </div>
             </form>
+        </div>
     </div>
 </body>
 </html>
