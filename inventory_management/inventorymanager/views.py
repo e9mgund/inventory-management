@@ -34,7 +34,7 @@ class HomeView(LoginRequiredMixin,generic.TemplateView):
     
     def get_context_data(self, **kwargs: Any) :
         Asset_records = [i for i in list(Assets.objects.all()) if not i.in_out]
-        Allocated_records = list(Allocated.objects.values())
+        Allocated_records = [i for i in Allocated.objects.all() if Assets.objects.get(id=i.equipment_id_id).in_out]
         return {'Asset_records':Asset_records,'Asset_count':len(Asset_records),'Allocated_records':len(Allocated_records)}
     
     def addfield(self,request):
@@ -56,7 +56,7 @@ class AllocatedView(LoginRequiredMixin,generic.TemplateView):
 
     def get_context_data(self, **kwargs: Any):
         Asset_records = [i for i in list(Assets.objects.all()) if not i.in_out]
-        Allocated_records = Allocated.objects.all()
+        Allocated_records = [i for i in Allocated.objects.all() if Assets.objects.get(id=i.equipment_id_id).in_out]
         return {'Allocated_records':Allocated_records,'Asset_count':len(Asset_records),'Allocated_count':len(list(Allocated_records))}
 
 
@@ -75,6 +75,7 @@ def addfieldAllocated(request):
             asset_record = Assets.objects.get(id=equipment_id)
             asset_record.in_out = True
             asset_record.save()
+            return redirect('inventorymanager:allocated')
         else:
             pass
     else:
@@ -104,7 +105,6 @@ def addfield(request):
         record = Assets(equipment_id=eq_id,equipment_code=eq_code,equipment_name=eq_name,description=desc,category_name_id=category_id,in_out=False)
         record.save()
         transaction_record = Transactions(equipment_ID_id=record.id,user="Not Assigned",Transaction_type="IN",Transaction_date=datetime.now().date(),category_name_id=category_id)
-        print(transaction_record.__dict__)
         transaction_record.save()
         return redirect('inventorymanager:newbase')
 
@@ -207,7 +207,13 @@ def deletefield(request, pk):
 def deleteallocated(request, pk):
     record = get_object_or_404(Allocated,pk=pk)
     if request.method == 'POST':
-        print(record.__dict__)
+        # print(record.__dict__)
+        transaction_record = Transactions(equipment_ID_id=record.id,user="Not Assigned",Transaction_type="IN",Transaction_date=datetime.now().date(),category_name_id=record.category_name_id)
+        # transaction_record.save()
+        assets_record = Assets.objects.get(id=record.equipment_id_id)
+        assets_record.in_out = False
+        assets_record.save()
+        return JsonResponse({'success':True})
         
 
 def getfield(request, record_id):
